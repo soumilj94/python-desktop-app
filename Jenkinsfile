@@ -52,13 +52,13 @@ pipeline{
                     pip install pyinstaller
                     pyinstaller --onefile main.py
                 """
-                echo "App Packaged. Binary in dist/app"
+                echo "App Packaged. Binary in dist/main"
             }
         }
         
         stage('Archive artifact'){
             steps{
-                archiveArtifacts artifacts: 'dist/app', allowEmptyArchive: false
+                archiveArtifacts artifacts: 'dist/main', allowEmptyArchive: false
                 echo "Binary archived in jenkins - downloadable from build page"
             }
         }
