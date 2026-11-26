@@ -40,7 +40,7 @@ pipeline{
             steps{
                 sh '''
                     . venv/bin/activate
-                    pytest test_app.py -v --tb=short
+                    pytest test_main.py -v --tb=short
                 '''
             }
         }
