@@ -88,13 +88,13 @@ pipeline{
 
     post{
         success{
-            echo 'BUILD #${BUILD_NUMBER} SUCCEEDED'
+            echo "BUILD #${BUILD_NUMBER} SUCCEEDED"
         }
         failure{
-            echo 'BUILD #${BUILD_NUMBER} FAILED - check logs'
+            echo "BUILD #${BUILD_NUMBER} FAILED - check logs"
         }
         always{
-            sh 'rm -rf venv dist build || true'
+            sh "rm -rf venv dist build || true"
             echo "Cleanup done."
         }
     }
