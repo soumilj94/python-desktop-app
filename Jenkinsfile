@@ -26,35 +26,35 @@ pipeline{
 
         stage('Setup Python Environment'){
             steps{
-                sh '''
+                sh """
                     python3.14 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
                     pip install pytest
-                '''
+                """
             }
         }
 
         stage('Run Tests'){
             steps{
-                sh '''
+                sh """
                     . venv/bin/activate
                     pytest test_main.py -v --tb=short
-                '''
+                """
             }
         }
         
         stage('SonarQube analysis'){
             steps{
                 withSonarQubeEnv('sonar-server'){
-                    sh '''
+                    sh """
                         ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=python-desktop-app \
                         -Dsonar.projectName=python-desktop-app \
                         -Dsonar.sources=. \
                         -Dsonar.exclusions=venv/**
-                    '''
+                    """
                 }
             }
         }
@@ -69,11 +69,11 @@ pipeline{
 
         stage('Package App'){
             steps{
-                sh '''
+                sh """
                     . venv/bin/activate
                     pip install pyinstaller
                     pyinstaller --onefile app.py
-                '''
+                """
                 echo "App Packaged. Binary in dist/app"
             }
         }
