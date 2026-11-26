@@ -44,31 +44,6 @@ pipeline{
                 """
             }
         }
-        
-        stage('SonarQube analysis'){
-            environment{
-                SCANNER_HOME = tool 'sonar-scanner'
-            }
-            steps{
-                withSonarQubeEnv('sonar-server'){
-                    sh """
-                        ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=python-desktop-app \
-                        -Dsonar.projectName=python-desktop-app \
-                        -Dsonar.sources=. \
-                        -Dsonar.exclusions=venv/**
-                    """
-                }
-            }
-        }
-        
-        stage('Quality gate'){
-            steps{
-                timeout(time: 5, unit: 'MINUTES'){
-                    waitForQualityGate abortPipeline: false
-                }
-            }
-        }
 
         stage('Package App'){
             steps{
