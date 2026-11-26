@@ -50,7 +50,7 @@ pipeline{
                 sh """
                     . venv/bin/activate
                     pip install pyinstaller
-                    pyinstaller --onefile app.py
+                    pyinstaller --onefile main.py
                 """
                 echo "App Packaged. Binary in dist/app"
             }
