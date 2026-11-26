@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         APP_NAME = "python-desktop-app"
-        PYTHON = "python3"
+        PYTHON = "python3.14"
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline{
         stage('Setup Python Environment'){
             steps{
                 sh '''
-                    python3 -m venv venv
+                    python3.14 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
@@ -78,9 +78,9 @@ pipeline{
             }
         }
         
-        stage('Archieve artifact'){
+        stage('Archive artifact'){
             steps{
-                archieveArtifacts artifact: 'dist/app', allowEmptyArchive: false
+                archiveArtifacts artifacts: 'dist/app', allowEmptyArchive: false
                 echo "Binary archived in jenkins - downloadable from build page"
             }
         }
